@@ -13,8 +13,21 @@ class UserRepository():
         return user
     
     @staticmethod
-    async def get_by_phone(session: AsyncSession, phone: str):
+    async def get_by_phone(
+        session: AsyncSession, 
+        phone: str
+    ):
         stmt = select(User).where(User.phone == phone)
+        user = (await session.execute(stmt)).scalar_one_or_none()
+
+        return user
+    
+    @staticmethod
+    async def get_by_telegram_id(
+        session: AsyncSession, 
+        telegram_id: int, 
+    ):
+        stmt = select(User).where(User.telegram_id == telegram_id)
         user = (await session.execute(stmt)).scalar_one_or_none()
 
         return user
