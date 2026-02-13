@@ -15,13 +15,19 @@ class UserServiceGrpc(user_pb2_grpc.UserServiceServicer):
         phone = (request.phone or "").strip()
 
         if telegram_id <= 0:
-            return user_pb2.ValidateUserResponse(user_id="", status=user_pb2.INVALID_DATA)
+            return context.abort(
+                grpc.StatusCode.INVALID_ARGUMENT,
+                "telegram_id must be positive"
+            )
 
         async with self._session_factory() as session:
             user = await UserRepository.get_by_telegram_id(session, telegram_id)
 
             if not user:
-                return user_pb2.ValidateUserResponse(user_id="", status=user_pb2.NOT_FOUND)
+                return context.abort(
+                    grpc.StatusCode.NOT_FOUND,
+                    "user not found"
+                )
 
-            return user_pb2.ValidateUserResponse(user_id=str(user.id), status=user_pb2.VALID)
+            return user_pb2.ValidateUserResponse(user_id=str(user.id))
 

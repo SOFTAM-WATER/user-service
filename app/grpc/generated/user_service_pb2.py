@@ -24,19 +24,17 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12user_service.proto\x12\x08users.v1\"L\n\x13ValidateUserRequest\x12\x13\n\x0btelegram_id\x18\x01 \x01(\x03\x12\r\n\x05phone\x18\x02 \x01(\t\x12\x11\n\tfull_name\x18\x03 \x01(\t\"S\n\x14ValidateUserResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12*\n\x06status\x18\x02 \x01(\x0e\x32\x1a.users.v1.ValidationStatus*K\n\x10ValidationStatus\x12\t\n\x05VALID\x10\x00\x12\r\n\tNOT_FOUND\x10\x01\x12\x0b\n\x07\x42LOCKED\x10\x02\x12\x10\n\x0cINVALID_DATA\x10\x03\x32\x64\n\x0bUserService\x12U\n\x14ValidateTelegramUser\x12\x1d.users.v1.ValidateUserRequest\x1a\x1e.users.v1.ValidateUserResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12user_service.proto\x12\x08users.v1\"L\n\x13ValidateUserRequest\x12\x13\n\x0btelegram_id\x18\x01 \x01(\x03\x12\r\n\x05phone\x18\x02 \x01(\t\x12\x11\n\tfull_name\x18\x03 \x01(\t\"\'\n\x14ValidateUserResponse\x12\x0f\n\x07user_id\x18\x01 \x01(\t2d\n\x0bUserService\x12U\n\x14ValidateTelegramUser\x12\x1d.users.v1.ValidateUserRequest\x1a\x1e.users.v1.ValidateUserResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'user_service_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_VALIDATIONSTATUS']._serialized_start=195
-  _globals['_VALIDATIONSTATUS']._serialized_end=270
   _globals['_VALIDATEUSERREQUEST']._serialized_start=32
   _globals['_VALIDATEUSERREQUEST']._serialized_end=108
   _globals['_VALIDATEUSERRESPONSE']._serialized_start=110
-  _globals['_VALIDATEUSERRESPONSE']._serialized_end=193
-  _globals['_USERSERVICE']._serialized_start=272
-  _globals['_USERSERVICE']._serialized_end=372
+  _globals['_VALIDATEUSERRESPONSE']._serialized_end=149
+  _globals['_USERSERVICE']._serialized_start=151
+  _globals['_USERSERVICE']._serialized_end=251
 # @@protoc_insertion_point(module_scope)

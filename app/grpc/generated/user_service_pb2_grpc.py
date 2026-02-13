@@ -80,7 +80,7 @@ class UserService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(
+        return grpc.experimental.unary_unary( #type:ignore
             request,
             target,
             '/users.v1.UserService/ValidateTelegramUser',
