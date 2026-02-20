@@ -6,9 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.db import Base
 from app.utils.custom_types import uuid_pk, UserType, created_at as created_at_sql
-
-if TYPE_CHECKING:
-    from app.models.roles import UserRole 
+from app.models.roles import UserRole
 
 
 class User(Base):
@@ -22,8 +20,8 @@ class User(Base):
     created_at: Mapped[created_at_sql]
     password: Mapped[str] = mapped_column(String(255), nullable=False)
 
-    # user_roles: Mapped[list[UserRole]] = relationship(
-    #     "UserRole",
-    #     back_populates="user",
-    #     cascade="all, delete-orphan",
-    # )
+    user_roles: Mapped[list[UserRole]] = relationship(
+        "UserRole",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
