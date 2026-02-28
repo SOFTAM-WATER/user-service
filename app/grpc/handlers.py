@@ -7,8 +7,8 @@ from app.database.db import async_session_maker
 
 
 class UserServiceGrpc(user_pb2_grpc.UserServiceServicer):
-    def __init__(self, session_factory):
-        self._session_factory = session_factory  
+    def __init__(self, uow_factory):
+        self._uow_factory = uow_factory
 
     async def ValidateTelegramUser(self, request, context):
         telegram_id = request.telegram_id
@@ -20,8 +20,8 @@ class UserServiceGrpc(user_pb2_grpc.UserServiceServicer):
                 "telegram_id must be positive"
             )
 
-        async with self._session_factory() as session:
-            service = UserService(session)
+        async with self._uow_factory() as uow:
+            service = UserService(uow)
             user_id = await service.get_user_id_by_telegram_id(telegram_id)
             if not user_id:
                 return context.abort(

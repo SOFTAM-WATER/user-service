@@ -32,13 +32,11 @@ def transaction_mode(
     def decorator(func: T) -> T:
         @functools.wraps(func)
         async def wrapper(self: AbstractService, *args: Any, **kwargs: Any) -> Any:
-            if self.uow.is_open:
+            async with self.uow:
                 res = await func(self, *args, **kwargs)
                 if auto_flush:
                     await self.uow.flush()
                 return res
-            async with self.uow:
-                return await func(self, *args, **kwargs)
         
         return wrapper #type:ignore
     
