@@ -3,13 +3,13 @@ from typing import TYPE_CHECKING
 from sqlalchemy import String, Integer, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.database.db import Base
+from app.models.base_model import BaseModel
 from app.utils.custom_types import uuid_ref_foreign
 
 if TYPE_CHECKING:
     from app.models.user import User
 
-class Role(Base):
+class Role(BaseModel):
     __tablename__ = "roles"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
@@ -22,7 +22,7 @@ class Role(Base):
     )
 
 
-class UserRole(Base):
+class UserRole(BaseModel):
     __tablename__ = "user_roles"
 
     user_id: Mapped[uuid_ref_foreign]

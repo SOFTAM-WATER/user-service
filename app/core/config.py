@@ -1,22 +1,21 @@
-import os
-from pydantic_settings import BaseSettings
-
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
 
-from dotenv import load_dotenv, find_dotenv
-
-load_dotenv(find_dotenv('.env'))
-
-
 class Settings(BaseSettings):
-    database_url: str = os.getenv("DATABASE_URL", "")
+    DATABASE_URL: str
+    SECRET_KEY: str
+    REDIS_URL: str
 
-    model_config = {
-        "env_file": "env",
-        "extra": "ignore"
-    }
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore" 
+    )
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    return Settings() #type:ignore

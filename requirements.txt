@@ -8,3 +8,5 @@ asyncpg==0.31.0
 uvicorn==0.40.0
 grpcio==1.78.0
 grpcio-tools==1.78.0
+redis==7.2.1
+python-jose[cryptography]==3.5.0

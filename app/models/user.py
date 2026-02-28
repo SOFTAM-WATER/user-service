@@ -4,14 +4,16 @@ from typing import TYPE_CHECKING
 from sqlalchemy import String, BigInteger, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.database.db import Base
+from app.models.base_model import BaseModel
 from app.utils.custom_types import uuid_pk, UserType, created_at as created_at_sql
 from app.models.roles import UserRole
+from app.schemas.user import UserDB
 
 
-class User(Base):
+class User(BaseModel):
     __tablename__ = "users"
-
+    __mapper_args__ = {"eager_defaults": True}
+    
     id: Mapped[uuid_pk]
     phone: Mapped[str] = mapped_column(String(50), unique=True)
     telegram_id: Mapped[int] = mapped_column(BigInteger, nullable=True, unique=True)
@@ -25,3 +27,6 @@ class User(Base):
         back_populates="user",
         cascade="all, delete-orphan",
     )
+
+    def to_schema(self) -> UserDB:
+        return UserDB(**self.__dict__)
